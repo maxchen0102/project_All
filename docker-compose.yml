@@ -1,0 +1,24 @@
+version: '3'
+
+services:
+  backend:
+    build:
+      context: ./DServer    # Path to the directory containing your backend Dockerfile
+      dockerfile: Dockerfile        # Name of the Dockerfile for the backend
+    ports:
+      - "8000:8000"
+    networks:
+      - my-network
+
+  frontend:
+    build:
+      context: ./my-project   # Path to the directory containing your frontend Dockerfile
+      dockerfile: Dockerfile        # Name of the Dockerfile for the frontend
+    ports:
+      - "8080:80"
+    networks:
+      - my-network
+
+networks:
+  my-network:
+    driver: bridge
