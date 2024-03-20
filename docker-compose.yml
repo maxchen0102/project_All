@@ -6,6 +6,7 @@ services:
       context: ./DServer    # Path to the directory containing your backend Dockerfile
       dockerfile: Dockerfile        # Name of the Dockerfile for the backend
     container_name: backend
+    restart: always
     ports:
       - "8000:8000"
     networks:
@@ -16,10 +17,19 @@ services:
       context: ./my-project   # Path to the directory containing your frontend Dockerfile
       dockerfile: Dockerfile        # Name of the Dockerfile for the frontend
     container_name: frontend
+    restart: always
     ports:
       - "8080:80"
     networks:
       - my-network
+
+  DB:
+      image: postgres:latest
+
+      ports:
+        - "6666:6666"
+      networks:
+        - my-network
 
 networks:
   my-network:
